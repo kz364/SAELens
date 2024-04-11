@@ -19,7 +19,8 @@ from sae_vis.data_config_classes import (
     SaeVisLayoutConfig,
     SequencesConfig,
 )
-from sae_vis.data_fetching_fns import get_feature_data, SAEVisData
+from sae_vis.data_fetching_fns import get_feature_data
+from sae_vis.data_storing_fns import SAEVisData
 from torch.nn.functional import cosine_similarity
 from tqdm import tqdm
 
