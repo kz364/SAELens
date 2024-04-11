@@ -19,7 +19,7 @@ from sae_vis.data_config_classes import (
     SaeVisLayoutConfig,
     SequencesConfig,
 )
-from sae_vis.data_fetching_fns import get_feature_data
+from sae_vis.data_fetching_fns import get_feature_data, SAEVisData
 from torch.nn.functional import cosine_similarity
 from tqdm import tqdm
 
@@ -355,12 +355,21 @@ class DashboardRunner:
                     feature_centric_layout=layout,
                 )
 
-                feature_data = get_feature_data(
-                    encoder=self.sparse_autoencoder,  # type: ignore
+                ## new code
+
+                feature_data = SaeVisData.create(
+                    encoder=self.sparse_autoencoder,
                     model=self.model,
                     tokens=tokens,
                     cfg=feature_vis_params,
                 )
+
+                #feature_data = get_feature_data(
+                #    encoder=self.sparse_autoencoder,  # type: ignore
+                #    model=self.model,
+                #    tokens=tokens,
+                #    cfg=feature_vis_params,
+                #)
 
                 for i, test_idx in enumerate(feature_data.feature_data_dict.keys()):
                     feature_data.save_feature_centric_vis(
